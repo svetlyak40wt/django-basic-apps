@@ -1,0 +1,28 @@
+[2008-02-15]
+- Internationalized models
+
+[2008-02-11]
+- Changed foreign key in Service from User to Profile.
+- Changed foreign key in Link from User to Profile. 
+- Enabled edit_inline for both Service and Link.
+
+[2008-02-04]
+- Templates: added a {% block content_title %}
+
+[2008-01-19]
+- Renamed the 'list' class to 'link_list'
+
+[2008-01-07]
+- Removed foreign key to City object in the Places app. City is now a character field.
+- Added a field for state.
+- Made wrappers for generic views.
+- Service url now allows for more complex profile urls.
+- Changed Service url to use {user} as its variable name opposed to '%s'.
+
+[2007-12-21]
+- Changed Service so user and service is unique_together
+- Changed MobileProvider.domain to be unique
+- Changed ServiceType.url to be unique
+
+[2007-12-12]
+- Cleaned up unit tests.

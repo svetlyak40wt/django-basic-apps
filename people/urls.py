@@ -1,0 +1,25 @@
+from django.conf.urls.defaults import *
+
+
+urlpatterns = patterns('',
+  url(r'^types/(?P<slug>[-\w]+)/$',
+    view    = 'basic.people.views.person_type_detail',
+    name    = 'person_type_detail',
+  ),
+  url (r'^types/$',
+    view    = 'basic.people.views.person_type_list',
+    name    = 'person_type_list',
+  ),
+  url(r'^(?P<slug>[-\w]+)/$',
+    view    = 'basic.people.views.person_detail',
+    name    = 'person_detail',
+  ),
+  url (r'^$',
+    view    = 'basic.people.views.person_list',
+    name    = 'person_list',
+  ),
+  url(r'^quotes/(?P<slug>[-\w]+)/$',
+    view    = 'basic.people.views.person_quote_list',
+    name    = 'person_quote_list',
+  ),
+)

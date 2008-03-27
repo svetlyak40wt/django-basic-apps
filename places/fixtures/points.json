@@ -1,0 +1,13 @@
+[
+    {
+        "model" : "places.point",
+        "pk" : 1,
+        "fields" : {
+            "latitude": 38.969407,
+            "longitude":-95.235789,
+            "address": "11 East 8th St.",
+            "city": 1,
+            "zip": "66044"
+        }
+    }
+]

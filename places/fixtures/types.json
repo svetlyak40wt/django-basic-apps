@@ -1,0 +1,10 @@
+[
+    {
+        "model" : "places.placetype",
+        "pk" : 1,
+        "fields" : {
+            "title" : "Coffeehouse",
+            "slug" : "coffeehouse"
+        }
+    }
+]

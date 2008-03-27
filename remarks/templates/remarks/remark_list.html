@@ -1,0 +1,35 @@
+{% extends "remarks/base_remarks.html" %}
+
+
+{% block content_title %}
+  <h2>Remarks</h2>
+{% endblock %}
+
+
+{% block content %}
+  {% load markup %}
+  <div class="remark_list">
+    {% for remark in object_list %}
+      <div>
+        <h5 class="name">
+          <a name="c{{ remark.id }}" href="{{ remark.get_absolute_url }}" title="Permalink to {{ remark.person_name }}'s comment" class="count">{{ forloop.counter }}</a> 
+          {% if remark.person_url %}<a href="{{ remark.person_url }}">{{ remark.person_name }}</a> says...{% else %}{{ remark.person_name }} says...{% endif %}
+        </h5>
+        {{ remark.remark|urlizetrunc:"60"|markdown }}
+        <p class="date">Posted at {{ remark.submit_date|date:"P" }} on {{ remark.submit_date|date:"F j, Y" }}</p>
+      </div>
+    {% endfor %}
+  </div>
+  
+  {% if is_paginated %}
+  <p class="pagination">
+    {% if has_next %}
+    <a href="?page={{ next }}">Older</a>
+    {% endif %}
+    {% if has_next and has_previous %} | {% endif %}
+    {% if has_previous %}
+    <a href="?page={{ previous }}">Newer</a>
+    {% endif %}
+  </p>
+  {% endif %}
+{% endblock %}

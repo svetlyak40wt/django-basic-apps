@@ -1,0 +1,66 @@
+{% extends "blog/base_blog.html" %}
+
+
+{% block title %}{{ object.title }}{% endblock %}
+{% block body_id %}post_detail_page{% endblock %}
+
+
+{% block content_title %}
+  <h2>{{ object.title }}</h2>
+  <p class="other_posts">
+    {% if object.get_previous_by_publish %}
+    <a class="previous" href="{{ object.get_previous_by_publish.get_absolute_url }}">&laquo; {{ object.get_previous_by_publish }}</a>
+    {% endif %}
+    {% if object.get_next_by_publish %}
+    | <a class="next" href="{{ object.get_next_by_publish.get_absolute_url }}">{{ object.get_next_by_publish }} &raquo;</a> 
+    {% endif %}
+  </p>
+{% endblock %}
+
+
+{% block content %}
+  {% load blog markup comments tagging_tags %}
+  
+  <p class="date">{{ object.publish|date:"j F Y" }}</p>
+  
+  <div class="body">
+    {{ object.body|markdown|render_inlines }}
+  </div>
+  
+  {% tags_for_object object as tag_list %}
+  {% if tag_list %}
+  <p class="inline_tag_list"><strong>Related tags:</strong>
+    {% for tag in tag_list %}
+    {{ tag }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+  </p>
+  {% endif %}
+  
+  {% get_free_comment_list for blog.post object.id as comment_list %}
+  {% if comment_list %}
+  <div id="comments">
+    <a name="comments"></a>
+    <h3 class="comments_title">Comments</h3>
+    {% for comment in comment_list %}
+      {% if comment.is_public %}
+      <div class="comment">
+        <h5 class="name">
+          <a name="c{{ comment.id }}" href="{{ comment.get_absolute_url }}" title="Permalink to {{ comment.person_name }}'s comment" class="count">{{ forloop.counter }}</a> 
+          {% if comment.person_url %}<a href="{{ comment.person_url }}">{{ comment.person_name }}</a> says...{% else %}{{ comment.person_name }} says...{% endif %}
+        </h5>
+        {{ comment.comment|urlizetrunc:"60"|markdown }}
+        <p class="date">Posted at {{ comment.submit_date|date:"P" }} on {{ comment.submit_date|date:"F j, Y" }}</p>
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if object.allow_comments %}
+    {% free_comment_form for blog.post object.id %}
+  {% else %}
+    <div id="comment_form">
+      <h3>Comments are closed.</h3>
+      <p>Comments have been close for this post.</p>
+    </div>
+  {% endif %}
+{% endblock %}

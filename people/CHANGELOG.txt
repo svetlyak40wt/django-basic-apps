@@ -1,0 +1,20 @@
+[2008-02-15]
+- Internationalized models
+
+[2008-02-04]
+- Templates: added a {% block content_title %}
+
+[2008-01-25]
+- Moved generic view logic out of urls.py and into a view.
+
+[2008-01-20]
+- Added a field called 'mugshot_credit'
+
+[2008-01-19]
+- Renamed the 'list' class to 'link_list'
+
+[2007-12-21]
+- Added Quote model
+
+[2007-12-12]
+- Cleaned up unit tests.
