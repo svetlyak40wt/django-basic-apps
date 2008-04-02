@@ -16,7 +16,7 @@ class AudioSet(models.Model):
   modified      = models.DateTimeField(auto_now=True)
   
   class Meta:
-    db_table = 'audio_sets'
+    db_table = 'media_audio_sets'
   
   class Admin:
     pass
@@ -41,7 +41,7 @@ class Audio(models.Model):
   modified      = models.DateTimeField(auto_now=True)
 
   class Meta:
-    db_table = 'audios'
+    db_table = 'media_audio'
     verbose_name_plural = 'audios'
 
   class Admin:
@@ -70,7 +70,7 @@ class PhotoSet(models.Model):
   modified      = models.DateTimeField(auto_now=True)
   
   class Meta:
-    db_table = 'photo_sets'
+    db_table = 'media_photo_sets'
   
   class Admin:
     pass
@@ -113,7 +113,7 @@ class Photo(models.Model):
   exif = property(_get_exif, _set_exif, "Photo EXIF data, as a dict.")
   
   class Meta:
-    db_table = 'photos'
+    db_table = 'media_photos'
   
   class Admin:
     pass
@@ -140,7 +140,7 @@ class VideoSet(models.Model):
   modified      = models.DateTimeField(auto_now=True)
   
   class Meta:
-    db_table = 'video_sets'
+    db_table = 'media_video_sets'
   
   class Admin:
     pass
@@ -165,7 +165,7 @@ class Video(models.Model):
   modified      = models.DateTimeField(auto_now=True)
 
   class Meta:
-    db_table = 'videos'
+    db_table = 'media_videos'
 
   class Admin:
     pass
