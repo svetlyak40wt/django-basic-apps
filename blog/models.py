@@ -33,8 +33,8 @@ class Category(models.Model):
 class Post(models.Model):
   """ Post model """
   STATUS_CHOICES = (
-    (1, 'Draft'),
-    (2, 'Public'),
+    (1, _('Draft')),
+    (2, _('Public')),
   )
   title           = models.CharField(_('title'), max_length=200)
   slug            = models.SlugField(_('slug'), prepopulate_from=('title',))

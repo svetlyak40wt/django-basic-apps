@@ -95,3 +95,6 @@ class Quote(models.Model):
   
   def __unicode__(self):
     return u"%s" % self.quote
+  
+  def get_absolute_url(self):
+    return self.person.get_absolute_url()
