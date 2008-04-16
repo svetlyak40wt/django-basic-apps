@@ -12,6 +12,8 @@ def profile_list(request):
     queryset = Profile.objects.all(),
     paginate_by = 20,
   )
+profile_list.__doc__ = list_detail.object_list.__doc__
+
 
 def profile_detail(request, username):
   try:

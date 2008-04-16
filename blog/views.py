@@ -9,61 +9,16 @@ import re
 
 
 def post_list(request, page=0):
-  """
-  Post list
-
-  Template: ``blog/post_list.html``
-  Context:
-      object_list
-          list of objects
-      is_paginated
-          are the results paginated?
-      results_per_page
-          number of objects per page (if paginated)
-      has_next
-          is there a next page?
-      has_previous
-          is there a prev page?
-      page
-          the current page
-      next
-          the next page
-      previous
-          the previous page
-      pages
-          number of pages, total
-      hits
-          number of objects, total
-      last_on_page
-          the result number of the last of object in the
-          object_list (1-indexed)
-      first_on_page
-          the result number of the first object in the
-          object_list (1-indexed)
-      page_range:
-          A list of the page numbers (1-indexed).
-  """
   return list_detail.object_list(
     request,
     queryset = Post.objects.published(),
     paginate_by = 20,
     page = page,
   )
+post_list.__doc__ = list_detail.object_list.__doc__
+
 
 def post_archive_year(request, year):
-  """
-  Post archive year
-
-  Templates: ``blog/post_archive_year.html``
-  Context:
-    date_list
-      List of months in this year with objects
-    year
-      This year
-    object_list
-      List of objects published in the given month
-      (Only available if make_object_list argument is True)
-  """
   return date_based.archive_year(
     request,
     year = year,
@@ -71,22 +26,10 @@ def post_archive_year(request, year):
     queryset = Post.objects.published(),
     make_object_list = True,
   )
+post_archive_year.__doc__ = date_based.archive_year.__doc__
+
 
 def post_archive_month(request, year, month):
-  """
-  Post archive month
-
-  Templates: ``blog/post_archive_month.html``
-  Context:
-    month:
-      (date) this month
-    next_month:
-      (date) the first day of the next month, or None if the next month is in the future
-    previous_month:
-      (date) the first day of the previous month
-    object_list:
-      list of objects published in the given month
-  """
   return date_based.archive_month(
     request,
     year = year,
@@ -94,22 +37,10 @@ def post_archive_month(request, year, month):
     date_field = 'publish',
     queryset = Post.objects.published(),
   )
+post_archive_month.__doc__ = date_based.archive_month.__doc__
+
 
 def post_archive_day(request, year, month, day):
-  """
-  Post archive day
-
-  Templates: ``blog/post_archive_day.html``
-  Context:
-    object_list:
-      list of objects published that day
-    day:
-      (datetime) the day
-    previous_day
-      (datetime) the previous day
-    next_day
-      (datetime) the next day, or None if the current day is today
-  """
   return date_based.archive_day(
     request,
     year = year,
@@ -118,16 +49,10 @@ def post_archive_day(request, year, month, day):
     date_field = 'publish',
     queryset = Post.objects.published(),
   )
+post_archive_day.__doc__ = date_based.archive_day.__doc__
+
 
 def post_detail(request, slug, year, month, day):
-  """
-  Post detail
-
-  Templates: ``blog/post_detail.html``
-  Context:
-    object:
-      the object to be detailed
-  """
   return date_based.object_detail(
     request,
     year = year,
@@ -137,6 +62,8 @@ def post_detail(request, slug, year, month, day):
     slug = slug,
     queryset = Post.objects.published(),
   )
+post_detail.__doc__ = date_based.object_detail.__doc__
+
 
 def category_list(request):
   """
