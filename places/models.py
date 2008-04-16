@@ -34,7 +34,7 @@ class City(models.Model):
   slug          = models.SlugField(_('slug'), prepopulate_from=('city','state'), unique=True)
   
   class Meta:
-    verbose_name = _('city'), 
+    verbose_name = _('city')
     verbose_name_plural = _('cities')
     db_table = 'place_cities'
     unique_together = (('city', 'state',),)
