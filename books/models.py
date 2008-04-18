@@ -117,6 +117,7 @@ class Highlight(models.Model):
   
   class Admin:
     list_display  = ('book', 'highlight')
+    list_filter   = ('book',)
   
   def __unicode__(self):
     return self.highlight
