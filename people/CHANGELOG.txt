@@ -1,20 +1,25 @@
-[2008-02-15]
-- Internationalized models
+changes:
+  date: 2008-4-20
+    change: Added a foreign key relationship to User.
+    change: Added Conversation and ConversationItem models.
+  
+  date: 2008-02-15
+    change: Internationalized models.
 
-[2008-02-04]
-- Templates: added a {% block content_title %}
+  date: 2008-02-04
+    change: Templates: added a {% block content_title %}.
 
-[2008-01-25]
-- Moved generic view logic out of urls.py and into a view.
+  date: 2008-01-25
+    change: Moved generic view logic out of urls.py and into a view.
 
-[2008-01-20]
-- Added a field called 'mugshot_credit'
+  date: 2008-01-20
+    change: Added a field called 'mugshot_credit'
 
-[2008-01-19]
-- Renamed the 'list' class to 'link_list'
+  date: 2008-01-19
+    change: Renamed the 'list' class to 'link_list'
 
-[2007-12-21]
-- Added Quote model
+  date: 2007-12-21
+    change: Added Quote model
 
-[2007-12-12]
-- Cleaned up unit tests.
+  date: 2007-12-12
+    change: Cleaned up unit tests.

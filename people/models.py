@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.db.models import permalink
+from django.contrib.auth.models import User
 
 import datetime
 import dateutil
@@ -39,6 +40,7 @@ class Person(models.Model):
   middle_name       = models.CharField(_('middle name'), blank=True, max_length=100)
   last_name         = models.CharField(_('last name'), blank=True, max_length=100)
   slug              = models.SlugField(_('slug'), prepopulate_from=('first_name','last_name',), unique=True)
+  user              = models.ForeignKey(User, blank=True, null=True, help_text='If the person is an existing user of your site.')
   gender            = models.PositiveSmallIntegerField(_('gender'), choices=GENDER_CHOICES, blank=True, null=True)
   mugshot           = models.FileField(_('mugshot'), upload_to='mugshots', blank=True)
   mugshot_credit    = models.CharField(_('mugshot credit'), blank=True, max_length=200)
@@ -98,3 +100,27 @@ class Quote(models.Model):
   
   def get_absolute_url(self):
     return self.person.get_absolute_url()
+
+class Conversation(models.Model):
+  """ A conversation between two or many people """
+  title = models.CharField(blank=True, max_length=200)
+  
+  class Admin:
+    pass
+  
+  def __unicode__(self):
+    return self.title
+
+class ConversationItem(models.Model):
+  """ An item within a conversation """
+  conversation      = models.ForeignKey(Conversation, related_name='items')
+  order             = models.PositiveSmallIntegerField(core=True)
+  speaker           = models.ForeignKey(Person)
+  quote             = models.TextField()
+  
+  class Meta:
+    ordering = ('conversation', 'order')
+    unique_together(('conversation', 'order'),)
+  
+  def __unicode__(self):
+    return u"%s: %s" % (self.speaker.first_name, self.quote)
