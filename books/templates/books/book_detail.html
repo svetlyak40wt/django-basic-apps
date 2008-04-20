@@ -37,10 +37,15 @@
   </div>
   {% endif %}
   
-  {% for highlight in object.highlight_set.all %}
-  <blockquote class="quote">
-    {{ highlight.highlight|markdown }}
-    {% if highlight.page %}<p class="source">&mdash; p. {{ highlight.page }}<p>{% endif %}
-  </blockquote>
-  {% endfor %}
+  {% if object.highlight_set.all %}
+  <div class="highlights">
+    <h4>Highlights</h4>
+    {% for highlight in object.highlight_set.all %}
+    <blockquote>
+      {{ highlight.highlight|markdown }}
+      {% if highlight.page %}<p class="source">&mdash; p. {{ highlight.page }}<p>{% endif %}
+    </blockquote>
+    {% endfor %}
+  </div>
+  {% endif %}
 {% endblock %}
