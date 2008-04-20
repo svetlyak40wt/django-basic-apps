@@ -1,5 +1,0 @@
-[2008-02-04]
-- Templates: added a {% block content_title %}
-
-[2008-01-19]
-- Renamed the 'list' class to 'link_list'
