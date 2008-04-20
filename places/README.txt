@@ -1,10 +1,11 @@
 ==============================================
 Django Basic Places
-http://code.google.com/p/django-basic-places/
+http://code.google.com/p/django-basic-apps/
 ==============================================
 
 A simple places application for Django projects.
 
-To install this application place somewhere directly
-in your Python path and name folder 'places'. Then add 
-'places' to INSTALLED_APPS in your projects settings.py file.
+To install this app, simply create a folder somewhere in
+your PYTHONPATH named 'basic' and place the 'places'
+app inside. Then add 'basic.places' to your projects
+INSTALLED_APPS list in your settings.py file.
