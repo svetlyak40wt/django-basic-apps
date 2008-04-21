@@ -120,7 +120,7 @@ class ConversationItem(models.Model):
   
   class Meta:
     ordering = ('conversation', 'order')
-    unique_together(('conversation', 'order'),)
+    unique_together = (('conversation', 'order'),)
   
   def __unicode__(self):
     return u"%s: %s" % (self.speaker.first_name, self.quote)

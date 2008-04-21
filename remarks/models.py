@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from django.newforms import ModelForm
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -15,8 +16,8 @@ class Ban(models.Model):
     ('person_url', 'Person URL'),
     ('ip_address', 'IP Address'),
   )
-  field           = models.CharField(max_length=20, choices=BAN_TYPES)
-  rule            = models.CharField(blank=True, max_length=100)
+  field           = models.CharField(_('field'), max_length=20, choices=BAN_TYPES)
+  rule            = models.CharField(_('rule'), blank=True, max_length=100)
   
   class Meta:
     db_table  = 'remarks_bans'
@@ -40,15 +41,15 @@ class Remark(models.Model):
   content_type    = models.ForeignKey(ContentType)
   object_id       = models.PositiveIntegerField()
   content_object  = generic.GenericForeignKey('content_type', 'object_id')
-  remark          = models.TextField(max_length=3000)
+  remark          = models.TextField(_('remark'), max_length=3000)
   user            = models.ForeignKey(User, blank=True, null=True)
-  person_name     = models.CharField(max_length=50)
-  person_email    = models.EmailField(blank=True)
-  person_url      = models.URLField(blank=True, verify_exists=False)
-  submit_date     = models.DateTimeField(auto_now_add=True)
-  status          = models.IntegerField(choices=STATUS_CHOICES, radio_admin=True, default=2)
-  ip_address      = models.IPAddressField()
-  is_featured     = models.BooleanField(default=False)
+  person_name     = models.CharField(_('person name'), max_length=50)
+  person_email    = models.EmailField(_('person email'), blank=True)
+  person_url      = models.URLField(_('person url'), blank=True, verify_exists=False)
+  submit_date     = models.DateTimeField(_('submit date'), auto_now_add=True)
+  status          = models.IntegerField(_('status'), choices=STATUS_CHOICES, radio_admin=True, default=2)
+  ip_address      = models.IPAddressField(_('ip address'), )
+  is_featured     = models.BooleanField(_('is featured'), default=False)
   objects         = ManagerWithPublished()
   
   class Meta:
