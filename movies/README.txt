@@ -1,5 +1,5 @@
 ==============================================
-Django Basic Library (Movies)
+Django Basic Movies
 http://code.google.com/p/django-basic-apps/
 ==============================================
 

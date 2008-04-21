@@ -1,5 +1,5 @@
 ==============================================
-Django Basic Library (Books)
+Django Basic Books
 http://code.google.com/p/django-basic-apps/
 ==============================================
 
