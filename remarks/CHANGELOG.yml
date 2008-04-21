@@ -1,4 +1,7 @@
 changes:
+  date: 2008-04-20
+    change: Added translation hooks for model.
+      
   date: 2008-02-04
     change: Templates: added a {% block content_title %}
 

@@ -30,7 +30,7 @@ class PlaceType(models.Model):
 class City(models.Model):
   """ City model """
   city          = models.CharField(_('city'), max_length=100)
-  state         = models.USStateField(_('state'))
+  state         = models.CharField(_('state'), max_length=100)
   slug          = models.SlugField(_('slug'), prepopulate_from=('city','state'), unique=True)
   
   class Meta:
