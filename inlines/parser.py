@@ -72,7 +72,7 @@ def render_inline(inline):
   except KeyError:
     try:
       obj = model.objects.get(pk=inline['id'])
-      context = { 'content_type':"%s.%s" % (app_label, model_name), 'object': obj, 'class': inline_class }
+      context = { 'content_type':"%s.%s" % (app_label, model_name), 'object': obj, 'class': inline_class, 'settings': settings }
     except model.DoesNotExist:
       if settings.DEBUG:
         raise model.DoesNotExist, "Object matching '%s' does not exist"
