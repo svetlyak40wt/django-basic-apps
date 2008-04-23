@@ -1,3 +1,4 @@
 changes:
   date: 2008-04-22
+    change: Added an 'extract_inlines' filter so you can loop over a list of inlines in a body of text.
     change: Creating new inlines app.

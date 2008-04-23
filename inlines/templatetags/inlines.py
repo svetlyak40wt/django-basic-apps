@@ -39,3 +39,7 @@ def render_inlines(value):
   you know for sure one or the other will only be present.
   """
   return inlines(value)
+
+@register.filter
+def extract_inlines(value):
+  return inlines(value, True)

@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 
 
-def inlines(value):
+def inlines(value, return_list=False):
   try:
     from BeautifulSoup import BeautifulStoneSoup
   except ImportError:
@@ -16,12 +16,16 @@ def inlines(value):
   content = BeautifulStoneSoup(value, selfClosingTags=['inline','img','br','input','meta','link','hr'])
   inline_list = []
   
-  for inline in content.findAll('inline'):
-    rendered_inline = render_inline(inline)
-    inline.replaceWith(rendered_inline)
-  
-  return mark_safe(content)
-
+  if return_list:
+    for inline in content.findAll('inline'):
+      rendered_inline = render_inline(inline)
+      inline_list.append(rendered_inline['context'])
+    return inline_list
+  else:
+    for inline in content.findAll('inline'):
+      rendered_inline = render_inline(inline)
+      inline.replaceWith(render_to_string(rendered_inline['template'], rendered_inline['context']))
+    return mark_safe(content)
 
 def render_inline(inline):
   """
@@ -68,7 +72,7 @@ def render_inline(inline):
   except KeyError:
     try:
       obj = model.objects.get(pk=inline['id'])
-      context = { 'object': obj, 'class': inline_class }
+      context = { 'content_type':"%s.%s" % (app_label, model_name), 'object': obj, 'class': inline_class }
     except model.DoesNotExist:
       if settings.DEBUG:
         raise model.DoesNotExist, "Object matching '%s' does not exist"
@@ -81,6 +85,6 @@ def render_inline(inline):
         return ''
   
   template = ["inlines/%s_%s.html" % (app_label, model_name), "inlines/default.html"]
-  rendered_inline = render_to_string(template, context)
+  rendered_inline = {'template':template, 'context':context}
   
   return rendered_inline
