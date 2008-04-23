@@ -1,4 +1,7 @@
 changes:
+  date: 2008-04-22
+    change: Removed the 'render_inlines' filter from the Blog template tags. The tag is now in an app called inlines which can be used with any django app.
+    
   date: 2008-02-27
     change: Added 'allow_comments' field to the Post model.
     change: Removed 'Closed' choice from status field of Post model
