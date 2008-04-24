@@ -1,4 +1,8 @@
 changes:
+  date: 2008-04-23
+    change: Added an inline admin interface helper for choosing inlines to go into posts.
+    change: The inline app is now a dependancy of the blog. 
+      
   date: 2008-04-22
     change: Removed the 'render_inlines' filter from the Blog template tags. The tag is now in an app called inlines which can be used with any django app.
     
