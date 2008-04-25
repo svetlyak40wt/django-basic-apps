@@ -41,12 +41,15 @@ def post_remark(request):
   # Check for banned users. If there is a match
   # Set status to 'Removed'
   ban_list = Ban.objects.all()
-  for ban in ban_list:
-    m = re.search(ban.rule, request.META['REMOTE_ADDR'])
-    if m:
-      new_remark['status'] = 3
-    else:
-      new_remark['status'] = 2
+  if ban_list:
+    for ban in ban_list:
+      m = re.search(ban.rule, request.META['REMOTE_ADDR'])
+      if m:
+        new_remark['status'] = 3
+      else:
+        new_remark['status'] = 2
+  else:
+    new_remark['status'] = 2
   
   remark = Remark()
   form = RemarkForm(new_remark)
