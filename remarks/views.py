@@ -57,7 +57,7 @@ def post_remark(request):
   if form.is_valid():
     new_remark = form.save()
     context = { 'object':new_remark }
-    send_mail('', 'Comment made.', '', settings.MANAGERS_SMS)
+    send_mail('', 'Comment made.', '', settings.MANAGERS_SMS, fail_silently=True)
     return render_to_response('remarks/posted.html', context, context_instance=RequestContext(request))
   else:
     context = {
