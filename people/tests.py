@@ -8,6 +8,7 @@
 >>> r = c.get('/people/')
 >>> r.status_code
 200
+
 >>> r.context[-1]['object_list']
 [<Person: Nathan Borror>]
 

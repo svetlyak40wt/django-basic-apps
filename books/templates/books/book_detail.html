@@ -30,6 +30,16 @@
     <li>ISBN: {{ object.isbn }} (<a href="{{ object.amazon_url }}">Amazon</a>)</li>
   </ul>
   
+  {% ifnotequal object.bookmark object.pages %}
+  <h4>Reading progress</h4>
+  <p class="progress">
+    <span class="progress_bar" style="width:{% widthratio object.bookmark object.pages 100 %}%;">
+      <span class="pages_read">{{ object.bookmark }}</span>
+    </span>
+    <span class="pages_total">{{ object.pages }}</span>
+  </p>
+  {% endifnotequal %}
+  
   {% if object.review %}
   <div class="review">
     <h4>Review</h4>

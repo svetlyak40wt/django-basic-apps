@@ -1,1 +1,0 @@
-ALTER TABLE blog_posts ADD COLUMN allow_comments TINYINT(1) NOT NULL AFTER status;
