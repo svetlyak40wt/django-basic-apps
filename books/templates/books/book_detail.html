@@ -22,7 +22,7 @@
   {% endif %}
   
   <ul class="info_list">
-    <li>Author{{ object.authors.all|pluralize }}: {% for author in object.authors.all %}<a href="{{ author.get_absolute_url }}">{{ author.user.full_name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</li>
+    <li>Author{{ object.authors.all|pluralize }}: {% for author in object.authors.all %}<a href="{{ author.get_absolute_url }}">{{ author.full_name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</li>
     <li>Publisher: <a href="{{ object.publisher.get_absolute_url }}">{{ object.publisher.full_title }}</a></li>
     <li>Released: {{ object.published|date:"d F Y" }}</li>
     <li>Pages: {{ object.pages }} {% if not object.has_read %}on page {{ object.bookmark }}{% endif %}</li>
