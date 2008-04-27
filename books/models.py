@@ -121,3 +121,7 @@ class Highlight(models.Model):
   
   def __unicode__(self):
     return self.highlight
+  
+  @permalink
+  def get_absolute_url(self):
+    return ('book_detail', None, { 'slug': self.book.slug })
