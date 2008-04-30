@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import permalink
 from django.conf import settings
+from django.contrib.auth.models import User
 from basic.people.models import Person
 
 
@@ -29,6 +30,7 @@ class Publisher(models.Model):
   title         = models.CharField(max_length=100)
   prefix        = models.CharField(max_length=20, blank=True)
   slug          = models.SlugField(prepopulate_from=('title',), unique=True)
+  website       = models.URLField(blank=True, verify_exists=False)
   
   class Meta:
     db_table = 'book_publishers'
@@ -58,12 +60,13 @@ class Book(models.Model):
   authors       = models.ManyToManyField(Person, limit_choices_to={'person_types__slug__exact': 'author'})
   isbn          = models.CharField(max_length=14, blank=True)
   pages         = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
-  bookmark      = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
   publisher     = models.ForeignKey(Publisher, blank=True)
   published     = models.DateField(blank=True, null=True)
   cover         = models.FileField(upload_to='books', blank=True)
-  review        = models.TextField(blank=True)
+  description   = models.TextField(blank=True)
   genre         = models.ManyToManyField(Genre, blank=True)
+  created       = models.DateTimeField(auto_now_add=True)
+  modified      = models.DateTimeField(auto_now=True)
   
   class Meta:
     db_table = 'books'
@@ -94,18 +97,11 @@ class Book(models.Model):
   @property
   def cover_url(self):
     return '%s%s' % (settings.MEDIA_URL, self.cover)
-  
-  @property
-  def has_read(self):
-    if self.bookmark:
-      if self.bookmark < self.pages:
-        return False
-    else:
-      return True
 
 
 class Highlight(models.Model):
   """ Highlights from books """
+  user          = models.ForeignKey(User)
   book          = models.ForeignKey(Book)
   highlight     = models.TextField()
   page          = models.CharField(blank=True, max_length=20)
@@ -125,3 +121,20 @@ class Highlight(models.Model):
   @permalink
   def get_absolute_url(self):
     return ('book_detail', None, { 'slug': self.book.slug })
+
+
+class Page(models.Model):
+  """ Page model """
+  user          = models.ForeignKey(User)
+  book          = models.ForeignKey(Book)
+  current_page  = models.PositiveSmallIntegerField(default=0)
+  created       = models.DateTimeField(auto_now_add=True)
+  
+  class Meta:
+    db_table = "book_read_pages"
+
+  class Admin:
+    pass
+
+  def __unicode__(self):
+    return self.current_page

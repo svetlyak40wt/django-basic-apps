@@ -1,4 +1,12 @@
 changes:
+  date: 2008-04-30
+    change: Added a Page model and removed 'bookmark' from Book model.
+    change: Removed 'has_read' method from Book model.
+    change: Added 'user' field to Highlight model.
+    change: Added 'website' field to Publisher.
+    change: Added 'created' and 'modified' fields to Book model.
+    change: Renamed 'review' to 'description' on Book model.
+    
   date: 2008-02-23
     change: Removed edit_inline from Highlights
 
