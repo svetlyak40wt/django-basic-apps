@@ -73,7 +73,7 @@ class Book(models.Model):
     ordering = ('title',)
   
   class Admin:
-    pass
+    list_display  = ('title', 'pages')
     
   def __unicode__(self):
     return '%s' % self.full_title
@@ -132,9 +132,10 @@ class Page(models.Model):
   
   class Meta:
     db_table = "book_read_pages"
+    ordering = ('-created',)
 
   class Admin:
-    pass
+    list_display = ('book', 'current_page')
 
   def __unicode__(self):
-    return self.current_page
+    return "%s" % self.current_page

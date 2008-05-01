@@ -1,5 +1,6 @@
 changes:
   date: 2008-04-30
+    change: Changed /publisher/ to /publishers/.
     change: Added a Page model and removed 'bookmark' from Book model.
     change: Removed 'has_read' method from Book model.
     change: Added 'user' field to Highlight model.
