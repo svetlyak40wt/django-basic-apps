@@ -36,6 +36,15 @@
   </div>
   {% endif %}
   
+  {% if object.band.album_set.all %}
+  <h4>Other {{ object.band.full_title }}</h4>
+  <ul>
+    {% for album in object.band.album_set.all %}
+    <li><a href="{{ album.get_absolute_url }}">{{ album.full_title }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  
   {% if object.tracks.all %}
   <h4>Mp3's</h4>
   <ul>
