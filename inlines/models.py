@@ -3,15 +3,15 @@ from django.contrib.contenttypes.models import ContentType
 
 
 class InlineType(models.Model):
-  """ InlineType model """
-  title           = models.CharField(max_length=200)
-  content_type    = models.ForeignKey(ContentType)
-  
-  class Meta:
-    db_table = "inline_types"
+    """ InlineType model """
+    title           = models.CharField(max_length=200)
+    content_type    = models.ForeignKey(ContentType)
 
-  class Admin:
-    pass
+    class Meta:
+        db_table = 'inline_types'
 
-  def __unicode__(self):
-    return self.title
+    class Admin:
+        pass
+
+    def __unicode__(self):
+        return self.title
