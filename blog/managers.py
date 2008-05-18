@@ -3,6 +3,6 @@ import datetime
 
 
 class ManagerWithPublished(Manager):
-  """ Same as above but for more for templates """
-  def published(self):
-    return self.get_query_set().filter(status__gte=2, publish__lte=datetime.datetime.now())
+    """Returns published posts that are not in the future."""
+    def published(self):
+        return self.get_query_set().filter(status__gte=2, publish__lte=datetime.datetime.now())

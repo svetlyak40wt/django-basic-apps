@@ -1,6 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from basic.blog.models import Post
 
+
 class BlogSitemap(Sitemap):
     changefreq = "never"
     priority = 0.5
@@ -8,5 +9,5 @@ class BlogSitemap(Sitemap):
     def items(self):
         return Post.objects.published()
 
-    def lastmod(self, obj):
-        return obj.publish
+        def lastmod(self, obj):
+            return obj.publish
