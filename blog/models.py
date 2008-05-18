@@ -23,7 +23,7 @@ class Category(models.Model):
         pass
 
     def __unicode__(self):
-        return u"%s" % self.title
+        return u'%s' % self.title
 
     @permalink
     def get_absolute_url(self):
@@ -49,7 +49,7 @@ class Post(models.Model):
     categories      = models.ManyToManyField(Category, blank=True)
     tags            = TagField()
     objects         = ManagerWithPublished()
-  
+
     class Meta:
         verbose_name = _('post')
         verbose_name_plural = _('posts')
@@ -63,7 +63,7 @@ class Post(models.Model):
         search_fields = ('title', 'body')
 
     def __unicode__(self):
-        return u"%s" % self.title
+        return u'%s' % self.title
 
     @permalink
     def get_absolute_url(self):

@@ -68,7 +68,7 @@ post_detail.__doc__ = date_based.object_detail.__doc__
 def category_list(request):
     """
     Category list
-   
+
     Template: ``blog/category_list.html``
     Context:
         object_list
@@ -79,11 +79,11 @@ def category_list(request):
         queryset = Category.objects.all(),
         template_name = 'blog/category_list.html',
     )
- 
+
 def category_detail(request, slug):
     """
     Category detail
-    
+
     Template: ``blog/category_detail.html``
     Context:
         object_list
@@ -95,7 +95,7 @@ def category_detail(request, slug):
         category = Category.objects.get(slug__iexact=slug)
     except Category.DoesNotExist:
         raise Http404
-    
+
     return list_detail.object_list(
         request,
         queryset = category.post_set.published(),
@@ -128,11 +128,11 @@ yourselves)\b"""
 def search(request):
     """
     Search for blog posts.
-    
+
     This template will allow you to setup a simple search form that will try to return results based on
     given search strings. The queries will be put through a stop words filter to remove words like
     'the', 'a', or 'have' to help imporve the result set.
-    
+
     Template: ``blog/post_search.html``
     Context:
         object_list

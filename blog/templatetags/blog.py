@@ -14,7 +14,7 @@ class LatestPosts(template.Node):
     def __init__(self, limit, var_name):
         self.limit = limit
         self.var_name = var_name
-    
+
     def render(self, context):
         posts = Post.objects.published()[:int(self.limit)]
         if (int(self.limit) == 1):
@@ -27,13 +27,13 @@ class LatestPosts(template.Node):
 def get_latest_posts(parser, token):
     """
     Gets any number of latest posts and stores them in a varable.
-    
+
     Syntax::
-    
+
         {% get_latest_posts [limit] as [var_name] %}
-    
+
     Example usage::
-      
+
         {% get_latest_posts 10 as latest_post_list %}
     """
     try:
@@ -50,7 +50,7 @@ def get_latest_posts(parser, token):
 class BlogCategories(template.Node):
     def __init__(self, var_name):
         self.var_name = var_name
-    
+
     def render(self, context):
         categories = Category.objects.all()
         context[self.var_name] = categories
@@ -60,13 +60,13 @@ class BlogCategories(template.Node):
 def get_blog_categories(parser, token):
     """
     Gets all blog categories.
-    
+
     Syntax::
-      
+
         {% get_blog_categories as [var_name] %}
-    
+
     Example usage::
-    
+
         {% get_blog_categories as category_list %}
     """
     try:
@@ -84,11 +84,11 @@ def get_blog_categories(parser, token):
 def get_links(value):
     """
     Extracts links from a ``Post`` body and returns a list.
-    
+
     Template Syntax::
-        
+
         {{ post.body|markdown|get_links }}
-        
+
     """
     try:
         try:
