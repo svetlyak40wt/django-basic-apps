@@ -1,6 +1,0 @@
-- model: people.person
-  pk: 1
-  fields:
-    first_name: 'Nathan'
-    last_name: 'Borror'
-    slug: 'nathan-borror'

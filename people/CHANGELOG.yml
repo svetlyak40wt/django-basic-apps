@@ -1,4 +1,7 @@
 changes:
+  date: 2008-05-18
+    change: Converted everything to 4 space tabs and made a few other changes to comply with Python Style Guide.
+    
   date: 2008-4-20
     change: Added a foreign key relationship to User.
     change: Added Conversation and ConversationItem models.
