@@ -7,7 +7,7 @@ urlpatterns = patterns('',
         view=place_views.city_detail,
         name='place_city_detail'),
 
-    url(r'^cities/$', 
+    url(r'^cities/$',
         view=place_views.city_list,
         name='place_city_list'),
 

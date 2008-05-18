@@ -32,17 +32,17 @@ class City(models.Model):
     city          = models.CharField(_('city'), max_length=100)
     state         = models.CharField(_('state'), max_length=100)
     slug          = models.SlugField(_('slug'), prepopulate_from=('city','state'), unique=True)
-  
+
     class Meta:
         verbose_name = _('city')
         verbose_name_plural = _('cities')
         db_table = 'place_cities'
         unique_together = (('city', 'state',),)
         ordering = ('state', 'city',)
-  
+
     class Admin:
        pass
-  
+
     def __unicode__(self):
         return u'%s, %s' % (self.city, self.state)
 

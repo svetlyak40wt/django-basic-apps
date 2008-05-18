@@ -1,5 +1,6 @@
 changes:
   date: 2008-05-18
+    change: Added doctests.
     change: Converted everything to 4 space tabs and made a few other changes to comply with Python Style Guide.
     
   date: 2008-04-20
