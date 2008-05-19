@@ -57,16 +57,20 @@ class Book(models.Model):
   prefix        = models.CharField(max_length=20, blank=True)
   subtitle      = models.CharField(blank=True, max_length=255)
   slug          = models.SlugField(prepopulate_from=('title',), unique=True)
-  authors       = models.ManyToManyField(Person, limit_choices_to={'person_types__slug__exact': 'author'})
+  authors       = models.ManyToManyField(Person, limit_choices_to={'person_types__slug__exact': 'author'}, related_name='books')
   isbn          = models.CharField(max_length=14, blank=True)
   pages         = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
-  publisher     = models.ForeignKey(Publisher, blank=True)
+  publisher     = models.ForeignKey(Publisher, blank=True, null=True)
   published     = models.DateField(blank=True, null=True)
   cover         = models.FileField(upload_to='books', blank=True)
   description   = models.TextField(blank=True)
   genre         = models.ManyToManyField(Genre, blank=True)
   created       = models.DateTimeField(auto_now_add=True)
   modified      = models.DateTimeField(auto_now=True)
+  #original_language   = models.CharField(blank=True, max_length=100)
+  #published_language  = models.CharField(blank=True, max_length=100)
+  #edition       = models.CharField(blank=True, max_length=100)
+  
   
   class Meta:
     db_table = 'books'
@@ -80,7 +84,10 @@ class Book(models.Model):
   
   @property
   def full_title(self):
-    return '%s %s' % (self.prefix, self.title)
+    if self.prefix:
+      return '%s %s' % (self.prefix, self.title)
+    else:
+      return '%s' % self.title
   
   @permalink
   def get_absolute_url(self):
@@ -93,10 +100,6 @@ class Book(models.Model):
         return 'http://www.amazon.com/dp/%s/?%s' % (self.isbn, settings.AMAZON_AFFILIATE_EXTENTION)
       except:
         return 'http://www.amazon.com/dp/%s/' % self.isbn
-    
-  @property
-  def cover_url(self):
-    return '%s%s' % (settings.MEDIA_URL, self.cover)
 
 
 class Highlight(models.Model):
@@ -116,7 +119,7 @@ class Highlight(models.Model):
     list_filter   = ('book',)
   
   def __unicode__(self):
-    return self.highlight
+    return '%s' % self.highlight
   
   @permalink
   def get_absolute_url(self):
@@ -131,11 +134,11 @@ class Page(models.Model):
   created       = models.DateTimeField(auto_now_add=True)
   
   class Meta:
-    db_table = "book_read_pages"
+    db_table = 'book_read_pages'
     ordering = ('-created',)
 
   class Admin:
     list_display = ('book', 'current_page')
 
   def __unicode__(self):
-    return "%s" % self.current_page
+    return '%s' % self.current_page

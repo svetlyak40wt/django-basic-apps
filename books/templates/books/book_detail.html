@@ -16,7 +16,7 @@
     {% if object.subtitle %}<em>{{ object.subtitle }}</em>{% endif %}</h3>
   
   {% if object.cover %}
-  <a class="cover" href="{{ object.amazon_url }}"><img src="{{ object.cover_url }}" alt="Book cover"></a>
+  <a class="cover" href="{{ object.amazon_url }}"><img src="{{ object.get_cover_url }}" alt="Book cover"></a>
   {% else %}
   <div class="no_cover"></div>
   {% endif %}
@@ -30,20 +30,10 @@
     <li>ISBN: {{ object.isbn }} (<a href="{{ object.amazon_url }}">Amazon</a>)</li>
   </ul>
   
-  {% ifnotequal object.bookmark object.pages %}
-  <h4>Reading progress</h4>
-  <p class="progress">
-    <span class="progress_bar" style="width:{% widthratio object.bookmark object.pages 100 %}%;">
-      <span class="pages_read">{{ object.bookmark }}</span>
-    </span>
-    <span class="pages_total">{{ object.pages }}</span>
-  </p>
-  {% endifnotequal %}
-  
-  {% if object.review %}
-  <div class="review">
-    <h4>Review</h4>
-    {{ object.review|markdown }}
+  {% if object.description %}
+  <div class="description">
+    <h4>Description</h4>
+    {{ object.description|markdown }}
   </div>
   {% endif %}
   
