@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404
 from django.views.generic import date_based, list_detail
@@ -91,10 +91,7 @@ def category_detail(request, slug):
         category
             Given category.
     """
-    try:
-        category = Category.objects.get(slug__iexact=slug)
-    except Category.DoesNotExist:
-        raise Http404
+    category = get_object_or_404(Category, slug__iexact=slug)
 
     return list_detail.object_list(
         request,
