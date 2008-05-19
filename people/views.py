@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.views.generic import list_detail
 from basic.people.models import *
 
@@ -40,10 +40,7 @@ person_list.__doc__ = list_detail.object_list.__doc__
 
 
 def person_quote_list(request, slug):
-    try:
-        person = Person.objects.get(slug__iexact=slug)
-    except Person.DoesNotExist:
-        raise Http404
+    person = get_object_or_404(Person, slug__iexact=slug)
 
     return list_detail.object_list(
         request,
