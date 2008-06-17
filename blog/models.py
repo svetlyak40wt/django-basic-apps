@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models import permalink
 from django.contrib.auth.models import User
 from tagging.fields import TagField
-from basic.blog.managers import *
+from basic.blog.managers import PublicManager
 
 import tagging
 
@@ -48,7 +48,7 @@ class Post(models.Model):
     modified        = models.DateTimeField(_('modified'), auto_now=True)
     categories      = models.ManyToManyField(Category, blank=True)
     tags            = TagField()
-    objects         = ManagerWithPublished()
+    objects         = PublicManager()
 
     class Meta:
         verbose_name = _('post')
