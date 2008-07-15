@@ -9,10 +9,10 @@
   <h2>{{ object.title }}</h2>
   <p class="other_posts">
     {% if object.get_previous_by_publish %}
-    <a class="previous" href="{{ object.get_previous_by_publish.get_absolute_url }}">&laquo; {{ object.get_previous_by_publish }}</a>
+    <a class="previous" href="{{ object.get_previous_post.get_absolute_url }}">&laquo; {{ object.get_previous_post }}</a>
     {% endif %}
     {% if object.get_next_by_publish %}
-    | <a class="next" href="{{ object.get_next_by_publish.get_absolute_url }}">{{ object.get_next_by_publish }} &raquo;</a> 
+    | <a class="next" href="{{ object.get_next_post.get_absolute_url }}">{{ object.get_next_post }} &raquo;</a> 
     {% endif %}
   </p>
 {% endblock %}

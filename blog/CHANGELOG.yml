@@ -1,4 +1,8 @@
 changes:
+    date: 2008-07-14
+        change: Removed get_query_set from Blog manager to fix a problem where saving a post marked as Draft would not save.
+        change: Added a get_previous_post and get_next_post method for front end template. These will not return Draft posts.
+        
     date: 2008-06-17
         change: BlogPostFeed is now BlogPostsFeed and there is a new BlogPostsByCategory.
         

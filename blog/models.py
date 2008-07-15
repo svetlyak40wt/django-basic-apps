@@ -73,3 +73,9 @@ class Post(models.Model):
             'day': self.publish.day,
             'slug': self.slug
         })
+    
+    def get_previous_post(self):
+        return self.get_previous_by_publish(status__gte=2)
+    
+    def get_next_post(self):
+        return self.get_next_by_publish(status__gte=2)
