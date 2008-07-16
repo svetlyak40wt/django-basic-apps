@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from django.http import Http404
+from django.views.generic import list_detail
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType

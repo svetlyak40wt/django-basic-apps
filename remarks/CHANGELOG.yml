@@ -1,4 +1,7 @@
 changes:
+  date: '2008-07-16'
+    change: Fixed an error with displaying a list of remarks
+  
   date: 2008-04-20
     change: Added translation hooks for model.
       
