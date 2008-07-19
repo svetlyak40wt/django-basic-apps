@@ -7,7 +7,7 @@ from basic.people.models import Person
 class Genre(models.Model):
   """ Genre model """
   title         = models.CharField(max_length=100)
-  slug          = models.SlugField(prepopulate_from=("title",), unique=True)
+  slug          = models.SlugField(unique=True)
   
   class Meta:
     db_table = 'movie_genres'
@@ -28,7 +28,7 @@ class Studio(models.Model):
   """ Studio model """
   title         = models.CharField(max_length=100)
   prefix        = models.CharField(max_length=20, blank=True)
-  slug          = models.SlugField(prepopulate_from=("title",), unique=True)
+  slug          = models.SlugField(unique=True)
   website       = models.URLField(blank=True, verify_exists=False)
 
   class Meta:
@@ -55,7 +55,7 @@ class Movie(models.Model):
   title         = models.CharField(max_length=255)
   prefix        = models.CharField(max_length=20, blank=True)
   subtitle      = models.CharField(blank=True, max_length=255)
-  slug          = models.SlugField(prepopulate_from=("title",), unique=True)
+  slug          = models.SlugField(unique=True)
   directors     = models.ManyToManyField(Person, limit_choices_to={'person_types__slug__exact': 'director'}, blank=True)
   studio        = models.ForeignKey(Studio, blank=True, null=True)
   released      = models.DateField(blank=True, null=True)

@@ -8,7 +8,7 @@ from basic.people.models import Person
 class Genre(models.Model):
   """ Genre model """
   title         = models.CharField(max_length=100)
-  slug          = models.SlugField(prepopulate_from=("title",), unique=True)
+  slug          = models.SlugField(unique=True)
   
   class Meta:
     db_table = 'book_genres'
@@ -29,7 +29,7 @@ class Publisher(models.Model):
   """ Publisher """
   title         = models.CharField(max_length=100)
   prefix        = models.CharField(max_length=20, blank=True)
-  slug          = models.SlugField(prepopulate_from=('title',), unique=True)
+  slug          = models.SlugField(unique=True)
   website       = models.URLField(blank=True, verify_exists=False)
   
   class Meta:
@@ -56,7 +56,7 @@ class Book(models.Model):
   title         = models.CharField(max_length=255)
   prefix        = models.CharField(max_length=20, blank=True)
   subtitle      = models.CharField(blank=True, max_length=255)
-  slug          = models.SlugField(prepopulate_from=('title',), unique=True)
+  slug          = models.SlugField(unique=True)
   authors       = models.ManyToManyField(Person, limit_choices_to={'person_types__slug__exact': 'author'}, related_name='books')
   isbn          = models.CharField(max_length=14, blank=True)
   pages         = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
@@ -67,9 +67,6 @@ class Book(models.Model):
   genre         = models.ManyToManyField(Genre, blank=True)
   created       = models.DateTimeField(auto_now_add=True)
   modified      = models.DateTimeField(auto_now=True)
-  #original_language   = models.CharField(blank=True, max_length=100)
-  #published_language  = models.CharField(blank=True, max_length=100)
-  #edition       = models.CharField(blank=True, max_length=100)
   
   
   class Meta:

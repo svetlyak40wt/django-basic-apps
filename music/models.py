@@ -7,7 +7,7 @@ from basic.people.models import Person
 class Genre(models.Model):
   """ Genre model """
   title         = models.CharField(max_length=100)
-  slug          = models.SlugField(prepopulate_from=("title",), unique=True)
+  slug          = models.SlugField(unique=True)
   
   class Meta:
     db_table = 'music_genres'
@@ -28,7 +28,7 @@ class Label(models.Model):
   """ Label """
   title         = models.CharField(max_length=100)
   prefix        = models.CharField(max_length=20, blank=True)
-  slug          = models.SlugField(prepopulate_from=("title",), unique=True)
+  slug          = models.SlugField(unique=True)
   website       = models.URLField(blank=True, verify_exists=False)
 
   class Meta:
@@ -54,7 +54,7 @@ class Band(models.Model):
   """ Band """
   title         = models.CharField(max_length=100)
   prefix        = models.CharField(max_length=20, blank=True)
-  slug          = models.SlugField(prepopulate_from=("title",), unique=True)
+  slug          = models.SlugField(unique=True)
   musicians     = models.ManyToManyField(Person, blank=True, limit_choices_to={'person_types__slug__exact': 'musician'})
   website       = models.URLField(blank=True, verify_exists=False)
 
@@ -82,7 +82,7 @@ class Album(models.Model):
   title           = models.CharField(max_length=255)
   prefix          = models.CharField(max_length=20, blank=True)
   subtitle        = models.CharField(blank=True, max_length=255)
-  slug            = models.SlugField(prepopulate_from=('title',))
+  slug            = models.SlugField()
   band            = models.ForeignKey(Band, blank=True)
   label           = models.ForeignKey(Label, blank=True)
   asin            = models.CharField(max_length=14, blank=True)
@@ -128,7 +128,7 @@ class Track(models.Model):
   album   = models.ForeignKey(Album, blank=True, null=True, related_name='tracks')
   band    = models.ForeignKey(Band, blank=True, null=True, related_name='tracks')
   title   = models.CharField(max_length=255)
-  slug    = models.SlugField(prepopulate_from=('title',))
+  slug    = models.SlugField()
   mp3     = models.FilePathField(path=settings.MEDIA_ROOT+'tracks', match='.*\.mp3$')
   
   class Meta:

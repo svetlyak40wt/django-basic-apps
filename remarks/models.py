@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.newforms import ModelForm
+from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -47,7 +47,7 @@ class Remark(models.Model):
   person_email    = models.EmailField(_('person email'), blank=True)
   person_url      = models.URLField(_('person url'), blank=True, verify_exists=False)
   submit_date     = models.DateTimeField(_('submit date'), auto_now_add=True)
-  status          = models.IntegerField(_('status'), choices=STATUS_CHOICES, radio_admin=True, default=2)
+  status          = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=2)
   ip_address      = models.IPAddressField(_('ip address'), )
   is_featured     = models.BooleanField(_('is featured'), default=False)
   objects         = ManagerWithPublished()

@@ -32,9 +32,6 @@ class Profile(models.Model):
     verbose_name_plural = _('user profiles')
     db_table = 'user_profiles'
 
-  class Admin:
-    list_display    = ('last_name', 'first_name', 'city')
-
   def __unicode__(self):
     return u"%s" % self.user.get_full_name()
   
@@ -71,9 +68,6 @@ class MobileProvider(models.Model):
     verbose_name_plural = _('mobile providers')
     db_table = 'user_mobile_providers'
 
-  class Admin:
-    pass
-
   def __unicode__(self):
     return u"%s" % self.title
 
@@ -87,9 +81,6 @@ class ServiceType(models.Model):
     verbose_name = _('service type')
     verbose_name_plural = _('service types')
     db_table = 'user_service_types'
-
-  class Admin:
-    pass
 
   def __unicode__(self):
     return u"%s" % self.title
@@ -107,10 +98,6 @@ class Service(models.Model):
     verbose_name = _('service')
     verbose_name_plural = _('services')
     db_table = 'user_services'
-
-  class Admin:
-    list_display = ('profile', 'service')
-    list_filter = ('profile', 'service')
 
   def __unicode__(self):
     return u"%s" % self.username
@@ -134,9 +121,6 @@ class Link(models.Model):
     verbose_name = _('link')
     verbose_name_plural = _('links')
     db_table = 'user_links'
-
-  class Admin:
-    pass
 
   def __unicode__(self):
     return u"%s" % self.title

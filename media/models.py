@@ -9,7 +9,7 @@ import tagging
 class AudioSet(models.Model):
   """ AudioSet model """
   title         = models.CharField(max_length=255)
-  slug          = models.SlugField(prepopulate_from=('title',))
+  slug          = models.SlugField()
   description   = models.TextField(blank=True)
   audios        = models.ManyToManyField('Audio', related_name='audio_sets')
   created       = models.DateTimeField(auto_now_add=True)
@@ -32,7 +32,7 @@ class AudioSet(models.Model):
 class Audio(models.Model):
   """ Audio model """
   title         = models.CharField(max_length=255)
-  slug          = models.SlugField(prepopulate_from=('title',))
+  slug          = models.SlugField()
   still         = models.FileField(upload_to=settings.MEDIA_ROOT+'audio_stills/', blank=True, help_text='An image that will be used as a thumbnail.')
   audio         = models.FilePathField(path=settings.MEDIA_ROOT+'audios/', recursive=True)
   description   = models.TextField(blank=True)
@@ -62,7 +62,7 @@ class Audio(models.Model):
 class PhotoSet(models.Model):
   """ PhotoSet model """
   title         = models.CharField(max_length=255)
-  slug          = models.SlugField(prepopulate_from=('title',))
+  slug          = models.SlugField()
   description   = models.TextField(blank=True)
   cover_photo   = models.ForeignKey('Photo', blank=True, null=True)
   photos        = models.ManyToManyField('Photo', related_name='photo_sets')
@@ -94,7 +94,7 @@ class Photo(models.Model):
       ('http://creativecommons.org/licenses/by-sa/2.0/',      'CC Attribution-ShareAlike'),
   )
   title         = models.CharField(max_length=255)
-  slug          = models.SlugField(prepopulate_from=('title',))
+  slug          = models.SlugField()
   photo         = models.FileField(upload_to="photos")
   taken_by      = models.CharField(max_length=100, blank=True)
   license       = models.URLField(blank=True, choices=LICENSES)
@@ -133,7 +133,7 @@ class Photo(models.Model):
 class VideoSet(models.Model):
   """ VideoSet model """
   title         = models.CharField(max_length=255)
-  slug          = models.SlugField(prepopulate_from=('title',))
+  slug          = models.SlugField()
   description   = models.TextField(blank=True)
   videos        = models.ManyToManyField('Video', related_name='video_sets')
   created       = models.DateTimeField(auto_now_add=True)
@@ -156,7 +156,7 @@ class VideoSet(models.Model):
 class Video(models.Model):
   """ Video model """
   title         = models.CharField(max_length=255)
-  slug          = models.SlugField(prepopulate_from=('title',))
+  slug          = models.SlugField()
   still         = models.FileField(upload_to=settings.MEDIA_ROOT+'video_stills/', blank=True, help_text='An image that will be used as a thumbnail.')
   video         = models.FilePathField(path=settings.MEDIA_ROOT+'videos/', recursive=True)
   description   = models.TextField(blank=True)

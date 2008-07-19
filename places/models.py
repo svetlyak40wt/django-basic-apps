@@ -9,7 +9,7 @@ import tagging
 class PlaceType(models.Model):
     """Place types model."""
     title         = models.CharField(_('title'), max_length=100, unique=True)
-    slug          = models.SlugField(_('slug'), prepopulate_from=('title',), unique=True)
+    slug          = models.SlugField(_('slug'), unique=True)
 
     class Meta:
         verbose_name = _('place type')
@@ -31,7 +31,7 @@ class City(models.Model):
     """City model."""
     city          = models.CharField(_('city'), max_length=100)
     state         = models.CharField(_('state'), max_length=100)
-    slug          = models.SlugField(_('slug'), prepopulate_from=('city','state'), unique=True)
+    slug          = models.SlugField(_('slug'), unique=True)
 
     class Meta:
         verbose_name = _('city')
@@ -84,14 +84,14 @@ class Place(models.Model):
     point         = models.ForeignKey(Point)
     prefix        = models.CharField(_('Pre-name'), blank=True, max_length=20)
     title         = models.CharField(_('title'), max_length=255)
-    slug          = models.SlugField(_('slug'), prepopulate_from=('title',))
+    slug          = models.SlugField(_('slug'))
     nickname      = models.CharField(_('nickname'), blank=True, max_length=100)
     unit          = models.CharField(_('unit'), blank=True, max_length=100, help_text='Suite or Apartment #')
     phone         = models.CharField(_('phone'), blank=True, max_length=20)
     url           = models.URLField(_('url'), blank=True, verify_exists=False)
     email         = models.EmailField(_('email'), blank=True)
     description   = models.TextField(_('description'), blank=True)
-    status        = models.IntegerField(_('status'), choices=STATUS_CHOICES, radio_admin=True, default=1)
+    status        = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=1)
     created       = models.DateTimeField(auto_now_add=True)
     modified      = models.DateTimeField(auto_now=True)
     place_types   = models.ManyToManyField(PlaceType, blank=True)

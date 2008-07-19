@@ -11,7 +11,7 @@ import dateutil
 class PersonType(models.Model):
     """Person type model."""
     title = models.CharField(_('title'), max_length=100)
-    slug = models.SlugField(_('slug'), prepopulate_from=('title',), unique=True)
+    slug = models.SlugField(_('slug'), unique=True)
 
     class Meta:
         verbose_name = _('person type')
@@ -39,7 +39,7 @@ class Person(models.Model):
     first_name        = models.CharField(_('first name'), blank=True, max_length=100)
     middle_name       = models.CharField(_('middle name'), blank=True, max_length=100)
     last_name         = models.CharField(_('last name'), blank=True, max_length=100)
-    slug              = models.SlugField(_('slug'), prepopulate_from=('first_name','last_name',), unique=True)
+    slug              = models.SlugField(_('slug'), unique=True)
     user              = models.ForeignKey(User, blank=True, null=True, help_text='If the person is an existing user of your site.')
     gender            = models.PositiveSmallIntegerField(_('gender'), choices=GENDER_CHOICES, blank=True, null=True)
     mugshot           = models.FileField(_('mugshot'), upload_to='mugshots', blank=True)
