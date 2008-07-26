@@ -12,9 +12,18 @@
 
 
 {% block content %}
-  <ul class="link_list">
+  <table>
+    <tr>
+      <th>Band</th>
+      <th>Album</th>
+      <th>Song</th>
+    </tr>
   {% for track in object_list %}
-    <li><a href="{{ track.get_absolute_url }}">{{ track.title }}</a></li>
+    <tr class="{% cycle 'odd' 'even' %}">
+      <td class="band"><a href="{{ track.band.get_absolute_url }}">{{ track.band }}</a></td>
+      <td class="album"><a href="{{ track.album.get_absolute_url }}">{{ track.album }}</a></td>
+      <td><a href="{{ track.get_absolute_url }}">"{{ track.title }}"</a></td>
+    </tr>
   {% endfor %}
-  </ul>
+  </table>
 {% endblock %}
