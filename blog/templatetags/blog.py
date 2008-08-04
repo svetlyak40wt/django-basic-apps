@@ -87,7 +87,7 @@ def get_links(value):
 
     Template Syntax::
 
-        {{ post.body|markdown|get_links }}
+        {{ post.body|markdown:"safe"|get_links }}
 
     """
     try:

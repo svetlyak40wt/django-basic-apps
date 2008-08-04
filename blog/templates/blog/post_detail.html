@@ -24,7 +24,7 @@
   <p class="date">{{ object.publish|date:"j F Y" }}</p>
   
   <div class="body">
-    {{ object.body|markdown }}
+    {{ object.body|markdown:"safe" }}
   </div>
   
   {% tags_for_object object as tag_list %}
@@ -48,7 +48,7 @@
           <a name="c{{ comment.id }}" href="{{ comment.get_absolute_url }}" title="Permalink to {{ comment.person_name }}'s comment" class="count">{{ forloop.counter }}</a> 
           {% if comment.person_url %}<a href="{{ comment.person_url }}">{{ comment.person_name }}</a> says...{% else %}{{ comment.person_name }} says...{% endif %}
         </h5>
-        {{ comment.comment|urlizetrunc:"60"|markdown }}
+        {{ comment.comment|urlizetrunc:"60"|markdown:"safe" }}
         <p class="date">Posted at {{ comment.submit_date|date:"P" }} on {{ comment.submit_date|date:"F j, Y" }}</p>
       </div>
       {% endif %}

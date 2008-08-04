@@ -33,7 +33,7 @@
   {% if object.description %}
   <div class="description">
     <h4>Description</h4>
-    {{ object.description|markdown }}
+    {{ object.description|markdown:"safe" }}
   </div>
   {% endif %}
   
@@ -42,7 +42,7 @@
     <h4>Highlights</h4>
     {% for highlight in object.highlight_set.all %}
     <blockquote>
-      {{ highlight.highlight|markdown }}
+      {{ highlight.highlight|markdown:"safe" }}
       {% if highlight.page %}<p class="source">&mdash; p. {{ highlight.page }}<p>{% endif %}
     </blockquote>
     {% endfor %}

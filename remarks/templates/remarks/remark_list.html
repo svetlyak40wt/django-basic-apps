@@ -18,7 +18,7 @@
           <a name="c{{ remark.id }}" href="{{ remark.get_absolute_url }}" title="Permalink to {{ remark.person_name }}'s comment" class="count">{{ forloop.counter }}</a> 
           {% if remark.person_url %}<a href="{{ remark.person_url }}">{{ remark.person_name }}</a> says...{% else %}{{ remark.person_name }} says...{% endif %}
         </h5>
-        {{ remark.remark|urlizetrunc:"60"|markdown }}
+        {{ remark.remark|urlizetrunc:"60"|markdown:"safe" }}
         <p class="date">Posted at {{ remark.submit_date|date:"P" }} on {{ remark.submit_date|date:"F j, Y" }}</p>
       </div>
     {% endfor %}

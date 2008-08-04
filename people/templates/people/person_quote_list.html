@@ -15,7 +15,7 @@
   
   {% for quote in object_list %}
   <blockquote class="quote">
-    {{ quote.quote|markdown }}
+    {{ quote.quote|markdown:"safe" }}
     <p class="source">&mdash; {{ quote.source }}<p>
   </blockquote>
   {% endfor %}

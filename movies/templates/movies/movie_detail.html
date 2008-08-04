@@ -32,7 +32,7 @@
   {% if object.review %}
   <div class="review">
     <h4>Review</h4>
-    {{ object.review|markdown }}
+    {{ object.review|markdown:"safe" }}
   </div>
   {% endif %}
 {% endblock %}

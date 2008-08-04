@@ -37,7 +37,7 @@
   {% if object.description %}
   <div class="description">
     <h3>Description</h3>
-    {{ object.description|markdown }}
+    {{ object.description|markdown:"safe" }}
   </div>
   {% endif %}
 {% endblock %}

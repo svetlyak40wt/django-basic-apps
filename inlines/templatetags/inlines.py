@@ -13,7 +13,7 @@ def render_inlines(value):
 
     Template Syntax::
 
-        {{ post.body|render_inlines|markdown }}
+        {{ post.body|render_inlines|markdown:"safe" }}
 
     Inline Syntax (singular)::
 
