@@ -16,7 +16,7 @@
     {% if object.subtitle %}<em>{{ object.subtitle }}</em>{% endif %}</h3>
   
   {% if object.cover %}
-  <a class="cover" href="{{ object.amazon_url }}"><img src="{{ object.get_cover_url }}" alt="Book cover"></a>
+  <a class="cover" href="{{ object.amazon_url }}"><img src="{{ object.cover.url }}" alt="Book cover"></a>
   {% else %}
   <div class="no_cover"></div>
   {% endif %}

@@ -3,15 +3,15 @@ from basic.blog import views as blog_views
 
 
 urlpatterns = patterns('basic.blogs.views',
-    url(r'^(?P<year>\d{4})/(?P<month>[a-z]{3})/(?P<day>\w{1,2})/(?P<slug>[-\w]+)/$',
+    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$',
         view=blog_views.post_detail,
         name='blog_detail'),
 
-    url(r'^(?P<year>\d{4})/(?P<month>[a-z]{3})/(?P<day>\w{1,2})/$',
+    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/$',
         view=blog_views.post_archive_day,
         name='blog_archive_day'),
 
-    url(r'^(?P<year>\d{4})/(?P<month>[a-z]{3})/$',
+    url(r'^(?P<year>\d{4})/(?P<month>\w{3})/$',
         view=blog_views.post_archive_month,
         name='blog_archive_month'),
 
