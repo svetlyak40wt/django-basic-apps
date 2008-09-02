@@ -1,4 +1,7 @@
 changes:
+  date: 2008-09-02
+    change: Changed PhoneNumberField to use localflavor
+    
   date: 2008-08-24
     change: Added a profile edit form
     

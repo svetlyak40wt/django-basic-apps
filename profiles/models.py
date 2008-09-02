@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import permalink
 from django.contrib.auth.models import User
+from django.contrib.localflavor.us.models import PhoneNumberField
 
 import datetime
 from dateutil import relativedelta
@@ -21,10 +22,10 @@ class Profile(models.Model):
     address1          = models.CharField(_('address1'), blank=True, max_length=100)
     address2          = models.CharField(_('address2'), blank=True, max_length=100)
     city              = models.CharField(_('city'), blank=True, max_length=100)
-    state             = models.USStateField(_('state'), blank=True)
+    state             = models.CharField(_('state'), blank=True, help_text='or Province')
     zip               = models.CharField(_('zip'), blank=True, max_length=10)
     country           = models.CharField(_('country'), blank=True, max_length=100)
-    mobile            = models.PhoneNumberField(_('mobile'), blank=True, null=True)
+    mobile            = PhoneNumberField(_('mobile'), blank=True)
     mobile_provider   = models.ForeignKey('MobileProvider', blank=True, null=True)
   
     class Meta:

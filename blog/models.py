@@ -37,7 +37,7 @@ class Post(models.Model):
         (2, _('Public')),
     )
     title           = models.CharField(_('title'), max_length=200)
-    slug            = models.SlugField(_('slug'))
+    slug            = models.SlugField(_('slug'), unique_for_date='publish')
     author          = models.ForeignKey(User, blank=True, null=True)
     body            = models.TextField(_('body'))
     tease           = models.TextField(_('tease'), blank=True)

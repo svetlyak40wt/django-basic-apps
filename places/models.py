@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import permalink
+from django.contrib.localflavor.us.models import PhoneNumberField
 from tagging.fields import TagField
 
 import tagging
@@ -87,7 +88,7 @@ class Place(models.Model):
     slug          = models.SlugField(_('slug'))
     nickname      = models.CharField(_('nickname'), blank=True, max_length=100)
     unit          = models.CharField(_('unit'), blank=True, max_length=100, help_text='Suite or Apartment #')
-    phone         = models.CharField(_('phone'), blank=True, max_length=20)
+    phone         = PhoneNumberField(_('phone'), blank=True)
     url           = models.URLField(_('url'), blank=True, verify_exists=False)
     email         = models.EmailField(_('email'), blank=True)
     description   = models.TextField(_('description'), blank=True)
