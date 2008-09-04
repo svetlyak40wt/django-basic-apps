@@ -24,4 +24,16 @@ class QuoteAdmin(admin.ModelAdmin):
 admin.site.register(Quote, QuoteAdmin)
 
 
-admin.site.register(Conversation)
+class ConversationItemInline(admin.StackedInline):
+    model = ConversationItem
+    fk = 'conversation'
+
+
+class ConversationAdmin(admin.ModelAdmin):
+    inlines = [
+        ConversationItemInline
+    ]
+
+admin.site.register(Conversation, ConversationAdmin)
+
+admin.site.register(ConversationItem)

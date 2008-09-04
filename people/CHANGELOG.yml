@@ -1,4 +1,7 @@
 changes:
+  date: 2008-09-04
+    change: Removed edit_inline from people model and added it to admin.py
+    
   date: 2008-05-18
     change: Converted everything to 4 space tabs and made a few other changes to comply with Python Style Guide.
     

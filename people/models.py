@@ -111,8 +111,8 @@ class Conversation(models.Model):
 
 class ConversationItem(models.Model):
     """An item within a conversation."""
-    conversation      = models.ForeignKey(Conversation, related_name='items', edit_inline=True)
-    order             = models.PositiveSmallIntegerField(core=True)
+    conversation      = models.ForeignKey(Conversation, related_name='items')
+    order             = models.PositiveSmallIntegerField()
     speaker           = models.ForeignKey(Person)
     quote             = models.TextField()
 
