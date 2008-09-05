@@ -22,7 +22,7 @@ class Profile(models.Model):
     address1          = models.CharField(_('address1'), blank=True, max_length=100)
     address2          = models.CharField(_('address2'), blank=True, max_length=100)
     city              = models.CharField(_('city'), blank=True, max_length=100)
-    state             = models.CharField(_('state'), blank=True, help_text='or Province')
+    state             = models.CharField(_('state'), blank=True, max_length=100, help_text='or Province')
     zip               = models.CharField(_('zip'), blank=True, max_length=10)
     country           = models.CharField(_('country'), blank=True, max_length=100)
     mobile            = PhoneNumberField(_('mobile'), blank=True)
