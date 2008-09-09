@@ -44,7 +44,7 @@ def get_latest_posts(parser, token):
     if not m:
         raise template.TemplateSyntaxError, "%s tag had invalid arguments" % tag_name
     format_string, var_name = m.groups()
-    return LatestPosts(format_string[0], var_name)
+    return LatestPosts(format_string, var_name)
 
 
 class BlogCategories(template.Node):
