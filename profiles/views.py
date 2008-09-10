@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.views.generic import list_detail
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
