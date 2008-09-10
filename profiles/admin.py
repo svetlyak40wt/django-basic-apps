@@ -3,7 +3,7 @@ from basic.profiles.models import *
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('last_name', 'first_name', 'city')
+    list_display = ('user', 'city')
 
 admin.site.register(Profile, ProfileAdmin)
 

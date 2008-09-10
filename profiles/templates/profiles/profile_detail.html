@@ -1,13 +1,13 @@
 {% extends "profiles/base_profile.html" %}
 
 
-{% block title %}Profile for {{ object.full_name }}{% endblock %}
+{% block title %}Profile for {{ object.user.get_full_name }}{% endblock %}
 
 
 {% block content_title %}
-  <h2 id="user_name">{{ object.full_name }}
+  <h2 id="user_name">{{ object.user.get_full_name }}
     <em id="user_city">{{ object.city }}, {{ object.state }}</em></h2>
-  <h3 id="user_age_and_gender">{{ object.get_gender_display }}, {% ifnotequal object.age '0' %}, {{ object.age }}{% endifnotequal %}</h3>
+  <h3 id="user_age_and_gender">{{ object.get_gender_display }}{% if object.age %}, {{ object.age }}{% endif %}</h3>
 {% endblock %}
 
 

@@ -39,15 +39,10 @@ class Profile(models.Model):
     @property
     def age(self):
         TODAY = datetime.date.today()
-        return u"%s" % relativedelta.relativedelta(TODAY, self.birth_date).years
-
-    @property
-    def first_name(self):
-        return u"%s" % self.user.first_name
-
-    @property
-    def last_name(self):
-        return u"%s" % self.user.last_name
+        if self.birth_date:
+            return u"%s" % relativedelta.relativedelta(TODAY, self.birth_date).years
+        else:
+            return None
 
     @permalink
     def get_absolute_url(self):
