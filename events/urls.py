@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from basic.events import views as event_views
 
 
-urlpatterns = patterns('basic.blogs.views',
+urlpatterns = patterns('',
     url(r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/(?P<event_id>\d)/$',
         view=event_views.event_detail,
         name='event_detail'),

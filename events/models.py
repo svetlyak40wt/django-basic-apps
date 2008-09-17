@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from tagging.fields import TagField
 from basic.places.models import Place
 
+import datetime
+
 
 class Event(models.Model):
     """ Event model """
@@ -48,6 +50,13 @@ class EventTime(models.Model):
         verbose_name = _('event time')
         verbose_name_plural = _('event times')
         db_table = 'event_times'
+    
+    @property
+    def is_past(self):
+        NOW = datetime.date.now()
+        if self.start < NOW:
+            return True
+        return False
 
     def __unicode__(self):
         return u'<Event Time>'
