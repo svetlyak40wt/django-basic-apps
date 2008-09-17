@@ -8,39 +8,42 @@ import datetime
 import re
 
 
-def post_list(request, page=0):
+def post_list(request, page=0, **kwargs):
     return list_detail.object_list(
         request,
         queryset = Post.objects.published(),
         paginate_by = 20,
         page = page,
+        **kwargs
     )
 post_list.__doc__ = list_detail.object_list.__doc__
 
 
-def post_archive_year(request, year):
+def post_archive_year(request, year, **kwargs):
     return date_based.archive_year(
         request,
         year = year,
         date_field = 'publish',
         queryset = Post.objects.published(),
         make_object_list = True,
+        **kwargs
     )
 post_archive_year.__doc__ = date_based.archive_year.__doc__
 
 
-def post_archive_month(request, year, month):
+def post_archive_month(request, year, month, **kwargs):
     return date_based.archive_month(
         request,
         year = year,
         month = month,
         date_field = 'publish',
         queryset = Post.objects.published(),
+        **kwargs
     )
 post_archive_month.__doc__ = date_based.archive_month.__doc__
 
 
-def post_archive_day(request, year, month, day):
+def post_archive_day(request, year, month, day, **kwargs):
     return date_based.archive_day(
         request,
         year = year,
@@ -48,11 +51,12 @@ def post_archive_day(request, year, month, day):
         day = day,
         date_field = 'publish',
         queryset = Post.objects.published(),
+        **kwargs
     )
 post_archive_day.__doc__ = date_based.archive_day.__doc__
 
 
-def post_detail(request, slug, year, month, day):
+def post_detail(request, slug, year, month, day, **kwargs):
     return date_based.object_detail(
         request,
         year = year,
@@ -61,11 +65,12 @@ def post_detail(request, slug, year, month, day):
         date_field = 'publish',
         slug = slug,
         queryset = Post.objects.published(),
+        **kwargs
     )
 post_detail.__doc__ = date_based.object_detail.__doc__
 
 
-def category_list(request):
+def category_list(request, template_name = 'blog/category_list.html', **kwargs):
     """
     Category list
 
@@ -77,10 +82,11 @@ def category_list(request):
     return list_detail.object_list(
         request,
         queryset = Category.objects.all(),
-        template_name = 'blog/category_list.html',
+        template_name = template_name,
+        **kwargs
     )
 
-def category_detail(request, slug):
+def category_detail(request, slug, template_name = 'blog/category_detail.html', **kwargs):
     """
     Category detail
 
@@ -97,7 +103,8 @@ def category_detail(request, slug):
         request,
         queryset = category.post_set.published(),
         extra_context = {'category': category},
-        template_name = 'blog/category_detail.html',
+        template_name = template_name,
+        **kwargs
     )
 
 
@@ -122,7 +129,7 @@ which|while|whither|who|whoever|whole|whom|whose|why|will|with|within|without|wo
 yourselves)\b"""
 
 
-def search(request):
+def search(request, template_name='blog/post_search.html'):
     """
     Search for blog posts.
 
@@ -137,6 +144,7 @@ def search(request):
         search_term
             Given search term.
     """
+    context = {}
     if request.GET:
         stop_word_list = re.compile(STOP_WORDS, re.IGNORECASE)
         search_term = '%s' % request.GET['q']
@@ -145,10 +153,7 @@ def search(request):
         if len(cleaned_search_term) != 0:
             post_list = Post.objects.filter(body__icontains=cleaned_search_term, status__gte=2, publish__lte=datetime.datetime.now())
             context = {'object_list': post_list, 'search_term':search_term}
-            return render_to_response('blog/post_search.html', context, context_instance=RequestContext(request))
         else:
             message = 'Search term was too vague. Please try again.'
             context = {'message':message}
-            return render_to_response('blog/post_search.html', context, context_instance=RequestContext(request))
-    else:
-        return render_to_response('blog/post_search.html', {}, context_instance=RequestContext(request))
+    return render_to_response(template_name, context, context_instance=RequestContext(request))

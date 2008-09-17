@@ -1,4 +1,7 @@
 changes:
+    date: 2008-09-17
+        change: Enabled the ability to override the default template names.
+
     date: 2008-08-26
         change: Upgraded post_detail.html to now use new Django refactored comments. Sidenote: basic.remarks have been removed.
         
