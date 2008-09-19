@@ -27,23 +27,13 @@ class Event(models.Model):
 
     def __unicode__(self):
         return self.title
-    
-    @permalink
-    def get_absolute_url(self):
-        return ('event_detail', None, {
-            'year': self.publish.year,
-            'month': self.publish.strftime('%b').lower(),
-            'day': self.publish.day,
-            'slug': self.slug,
-            'event_id': self.id
-        })
 
 
 class EventTime(models.Model):
     """ EventTime model """
     event           = models.ForeignKey(Event, related_name='event_times')
     start           = models.DateTimeField()
-    end             = models.DateTimeField(blank=True)
+    end             = models.DateTimeField(blank=True, null=True)
     is_all_day      = models.BooleanField(default=False)
   
     class Meta:
@@ -59,4 +49,14 @@ class EventTime(models.Model):
         return False
 
     def __unicode__(self):
-        return u'<Event Time>'
+        return u'%s' % self.event.title
+
+    @permalink
+    def get_absolute_url(self):
+        return ('event_detail', None, {
+            'year': self.start.year,
+            'month': self.start.strftime('%b').lower(),
+            'day': self.start.day,
+            'slug': self.event.slug,
+            'event_id': self.event.id
+        })

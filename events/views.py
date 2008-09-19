@@ -55,14 +55,14 @@ def event_archive_day(request, year, month, day):
 event_archive_day.__doc__ = date_based.archive_day.__doc__
 
 
-def event_detail(request, slug, year, month, day):
+def event_detail(request, slug, year, month, day, event_id):
     return date_based.object_detail(
         request,
         year = year,
         month = month,
         day = day,
         date_field = 'start',
-        slug = slug,
+        object_id = event_id,
         queryset = EventTime.objects.all(),
         allow_future = True,
     )
