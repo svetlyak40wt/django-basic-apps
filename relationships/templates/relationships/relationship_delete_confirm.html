@@ -1,0 +1,13 @@
+{% extends "relationships/base_relationships.html" %}
+
+
+{% block title %}{{ block.super }} | Delete confirm{% endblock %}
+{% block body_class %}{{ block.super }} relationship_delete_confirm{% endblock %}
+
+
+{% block content %}
+  <form action="{% url relationship_stop_follow to_user_id=to_user.id %}" method="post">
+    <p>Delete {{ to_user }} as a friend?
+      <input type="submit" name="submit" value="Yes please"></p>
+  </form>
+{% endblock %}
