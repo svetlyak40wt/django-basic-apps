@@ -30,7 +30,7 @@ class RelationshipManager(models.Manager):
     
     def follower(self, you, them):
         """Answers the question, are you following me?"""
-        if self.filter(from_user=them, to_user=you).count() > 0;
+        if self.filter(from_user=them, to_user=you).count() > 0:
             return True
         return False
 
