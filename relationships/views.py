@@ -3,16 +3,17 @@ from django.template import RequestContext
 from django.http import Http404, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from basic.relationships.models import *
+
+from basic.relationships.models import Relationship
 
 
 @login_required
-def follow(request, to_user_id, template_name='relationships/relationship_add_confirm.html', success_template_name='relationships/relationship_add_success.html'):
+def follow(request, to_user_id, template_name='relationships/relationship_add_confirm.html', success_template_name='relationships/relationship_add_success.html', mimetype='text/html'):
     to_user = get_object_or_404(User, pk=to_user_id)
     from_user = request.user
     
     if request.POST:
-        relationship = RelationshipForm({'to_user': to_user, 'from_user': from_user})
+        relationship = Relationship(from_user=from_user, to_user=to_user)
         relationship.save()
         
         if request.is_ajax():
@@ -25,12 +26,12 @@ def follow(request, to_user_id, template_name='relationships/relationship_add_co
 
 
 @login_required
-def stop_follow(request, to_user_id, template_name='relationships/relationship_delete_confirm.html', success_template_name='relationships/relationship_delete_success.html'):
+def stop_follow(request, to_user_id, template_name='relationships/relationship_delete_confirm.html', success_template_name='relationships/relationship_delete_success.html', mimetype='text/html'):
     to_user = get_object_or_404(User, pk=to_user_id)
     from_user = request.user
     
     if request.POST:
-        relationship = Relationship.objects.get(to_user=to_user, from_user=from_user)
+        relationship = get_object_or_404(Relationship, to_user=to_user, from_user=from_user)
         relationship.delete()
         
         if request.is_ajax():

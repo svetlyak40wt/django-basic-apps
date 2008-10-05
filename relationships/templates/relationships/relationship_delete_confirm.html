@@ -5,9 +5,14 @@
 {% block body_class %}{{ block.super }} relationship_delete_confirm{% endblock %}
 
 
+{% block content_title %}
+  <h2>Delete {{ to_user }}?</h2>
+{% endblock %}
+
+
 {% block content %}
   <form action="{% url relationship_stop_follow to_user_id=to_user.id %}" method="post">
-    <p>Delete {{ to_user }} as a friend?
-      <input type="submit" name="submit" value="Yes please"></p>
+    <p>Are you sure you want to delete {{ to_user }} as a friend?
+      <button type="submit" name="submit" value="Indeed">Indeed</button></p>
   </form>
 {% endblock %}

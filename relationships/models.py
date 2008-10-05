@@ -5,20 +5,19 @@ from django.utils.translation import ugettext_lazy as _
 
 class RelationshipManager(models.Manager):
     def relationships_for_user(self, user):
-        relationships = {'friends': [], 'followers': []}
+        friend_list = self.filter(from_user=user)
+        friend_id_list = friend_list & self.values_list('to_user', flat=True)
+        follower_list = self.filter(to_user=user).exclude(from_user__in=friend_id_list)
         
-        for relationship in self.filter(from_user=user):
-            relationships['friends'].append(relationship.to_user)
-        
-        for relationship in self.filter(to_user=user):
-            relationships['followers'].append(relationship.from_user)
-        
+        relationships = {
+            'friends': friend_list,
+            'followers': follower_list
+        }
+
         return relationships
     
     def relationship(self, from_user, to_user):
         if self.filter(from_user=from_user, to_user=to_user).count() > 0:
-            return True
-        if self.filter(from_user=to_user, to_user=from_user).count() > 0:
             return True
         return False
 
@@ -37,4 +36,4 @@ class Relationship(models.Model):
         db_table = 'relationships'
 
     def __unicode__(self):
-        return '<Relationship>'
+        return u'%s is connected to %s.' % (self.from_user, self.to_user)
