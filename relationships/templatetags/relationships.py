@@ -14,7 +14,7 @@ class GetRelationship(template.Node):
         from_user = template.resolve_variable(self.from_user, context)
         to_user = template.resolve_variable(self.to_user, context)
         
-        relationship = Relationship.objects.relationship(from_user=from_user, to_user=to_user)
+        relationship = Relationship.objects.relationship(from_user, to_user)
         context[self.varname] = relationship
           
         return ''
