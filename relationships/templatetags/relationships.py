@@ -14,8 +14,8 @@ class GetRelationship(template.Node):
         from_user = template.resolve_variable(self.from_user, context)
         to_user = template.resolve_variable(self.to_user, context)
         
-        relationship = Relationship.objects.relationship(from_user, to_user)
-        context[self.varname] = relationship
+        is_following = Relationship.objects.is_following(from_user, to_user)
+        context[self.varname] = is_following
           
         return ''
     

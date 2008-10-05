@@ -22,13 +22,13 @@ class RelationshipManager(models.Manager):
 
         return relationships
     
-    def relationship(self, you, them):
+    def is_following(self, you, them):
         """Answers the question, am I following you?"""
         if self.filter(from_user=you, to_user=them).count() > 0:
             return True
         return False
     
-    def follower(self, you, them):
+    def is_follower(self, you, them):
         """Answers the question, are you following me?"""
         if self.filter(from_user=them, to_user=you).count() > 0:
             return True
