@@ -12,12 +12,13 @@ def follow(request, to_user_id, template_name='relationships/relationship_add_co
     to_user = get_object_or_404(User, pk=to_user_id)
     from_user = request.user
     
-    if request.POST:
+    if request.is_ajax() or request.POST:
         relationship = Relationship(from_user=from_user, to_user=to_user)
         relationship.save()
         
         if request.is_ajax():
-            return HttpResponse("{'success': 'Success'}", mimetype="application/json")
+            context = "{'success': 'Success', 'to_user_id': '%s'}" % (to_user.id)
+            return HttpResponse(context, mimetype="application/json")
         else:
             template_name = success_template_name
 
@@ -30,12 +31,13 @@ def stop_follow(request, to_user_id, template_name='relationships/relationship_d
     to_user = get_object_or_404(User, pk=to_user_id)
     from_user = request.user
     
-    if request.POST:
+    if request.is_ajax() or request.POST:
         relationship = get_object_or_404(Relationship, to_user=to_user, from_user=from_user)
         relationship.delete()
         
         if request.is_ajax():
-            return HttpResponse("{'success': 'Success'}", mimetype="application/json")
+            context = "{'success': 'Success', 'to_user_id': '%s'}" % (to_user.id)
+            return HttpResponse(context, mimetype="application/json")
         else:
             template_name = success_template_name
     
