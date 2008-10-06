@@ -2,7 +2,8 @@
 
 
 {% block title %}{{ object.title }}{% endblock %}
-{% block body_id %}post_detail_page{% endblock %}
+{% block body_class %}{{ block.super }} post_detail{% endblock %}
+{% block body_id %}post_{{ object.id }}{% endblock %}
 
 
 {% block content_title %}
