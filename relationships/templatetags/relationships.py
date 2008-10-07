@@ -1,6 +1,7 @@
 from django import template
-from basic.relationships.models import Relationship
+from django.db import models
 
+Relationship = models.get_model('relationships', 'relationship')
 register = template.Library()
 
 
