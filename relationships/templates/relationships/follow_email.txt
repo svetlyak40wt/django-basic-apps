@@ -1,0 +1,6 @@
+Hi {{ to_user }},
+
+{{ from_user }} is now following you on {{ site.name }}. Check out their profile here:
+http://{{ site.domain }}/{{ from_user.username }}/
+
+{{ site.name }} crew

@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import models
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib.site.models import Site
 
 Relationship = models.get_model('relationships', 'relationship')
 
@@ -21,11 +22,13 @@ def follow(request, to_user_id, template_name='relationships/relationship_add_co
         relationship.save()
         
         if not settings.DEBUG:
+            site = Site.objects.get(pk=SITE_ID)
             context = {
                 'from_user': from_user, 
-                'to_user': to_user
+                'to_user': to_user,
+                'site': site
             }
-            subject =  '%s is now following you' % from_user.username
+            subject =  '%s is now following you on %s' % (from_user.username, site.name)
             message = render_to_string(email_template, context)
             email = EmailMessage(subject, message, settings.REPLY_EMAIL, ['%s' % to_user.email])
             email.send(fail_silently=False)
