@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import models
 from django.core.mail import EmailMessage
 from django.conf import settings
-from django.contrib.site.models import Site
+from django.contrib.sites.models import Site
 
 Relationship = models.get_model('relationships', 'relationship')
 
