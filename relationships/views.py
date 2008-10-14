@@ -22,7 +22,7 @@ def follow(request, to_user_id, template_name='relationships/relationship_add_co
         relationship.save()
         
         if not settings.DEBUG:
-            site = Site.objects.get(pk=SITE_ID)
+            site = Site.objects.get(pk=settings.SITE_ID)
             context = {
                 'from_user': from_user, 
                 'to_user': to_user,
