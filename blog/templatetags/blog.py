@@ -17,7 +17,7 @@ class LatestPosts(template.Node):
 
     def render(self, context):
         posts = Post.objects.published()[:int(self.limit)]
-        if (int(self.limit) == 1):
+        if posts and (int(self.limit) == 1):
             context[self.var_name] = posts[0]
         else:
             context[self.var_name] = posts
