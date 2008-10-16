@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404
 from django.views.generic import date_based, list_detail
+from django.db.models import Q
 from basic.blog.models import *
 
 import datetime
@@ -151,7 +152,7 @@ def search(request, template_name='blog/post_search.html'):
         cleaned_search_term = stop_word_list.sub('', search_term)
         cleaned_search_term = cleaned_search_term.strip()
         if len(cleaned_search_term) != 0:
-            post_list = Post.objects.filter(body__icontains=cleaned_search_term, status__gte=2, publish__lte=datetime.datetime.now())
+            post_list = Post.objects.published().filter(Q(body__icontains=cleaned_search_term) | Q(tags__icontains=cleaned_search_term) | Q(categories__title__icontains=cleaned_search_term))
             context = {'object_list': post_list, 'search_term':search_term}
         else:
             message = 'Search term was too vague. Please try again.'
