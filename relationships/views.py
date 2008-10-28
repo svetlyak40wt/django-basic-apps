@@ -18,10 +18,9 @@ def follow(request, to_user_id, template_name='relationships/relationship_add_co
     from_user = request.user
     
     if request.is_ajax() or request.POST:
-        relationship = Relationship(from_user=from_user, to_user=to_user)
-        relationship.save()
+        relationship, created = Relationship.objects.get_or_create(from_user=from_user, to_user=to_user)
         
-        if not settings.DEBUG:
+        if not settings.DEBUG and created:
             site = Site.objects.get(pk=settings.SITE_ID)
             context = {
                 'from_user': from_user, 
