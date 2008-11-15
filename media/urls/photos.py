@@ -1,12 +1,12 @@
 from django.conf.urls.defaults import *
-from basic.photos.models import *
+from basic.media.models import *
 
 
 photo_list = {
   'queryset': Photo.objects.all(),
 }
 photo_set_list = {
-  'queryset': Set.objects.all(),
+  'queryset': PhotoSet.objects.all(),
 }
 
 
