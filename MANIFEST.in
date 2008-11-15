@@ -1,0 +1,21 @@
+recursive-include blog/templates *.html
+recursive-include bookmarks/templates *.html
+recursive-include books/templates *.html
+recursive-include events/templates *.html
+recursive-include media/templates *.html
+recursive-include movies/templates *.html
+recursive-include music/templates *.html
+recursive-include people/templates *.html
+recursive-include places/templates *.html
+recursive-include profiles/templates *.html
+recursive-include relationships/templates *.html *.txt
+include blog/README.txt
+include bookmarks/README.txt
+include books/README.txt
+include inlines/README.txt
+include media/README.txt
+include movies/README.txt
+include music/README.txt
+include people/README.txt
+include places/README.txt
+include profiles/README.txt
