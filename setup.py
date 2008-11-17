@@ -5,10 +5,10 @@ packages.insert(0, 'basic')
 
 setup(
     name = 'django-basic-apps',
-    version = '0.1.0',
+    version = '0.6.1',
     description = 'Collection of general purpose application for Django.',
     keywords = 'django apps',
-    license = '',
+    license = 'New BSD License',
     author = 'Nathan',
     author_email = 'nathan@playgroundblues.com',
     maintainer = 'Alexander Artemenko',
